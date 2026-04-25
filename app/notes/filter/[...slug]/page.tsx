@@ -1,6 +1,6 @@
 import { getNotes } from '@/lib/api';
 import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query';
-import NotesClient from './Notes.Client';
+import NotesClient from './Notes.client';
 
 type NotesByIdCategoryProps = {
   params: Promise<{ slug: string[] }>;
