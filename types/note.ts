@@ -4,10 +4,10 @@ export type Note = {
    content: string;
    createdAt: string;
    updatedAt: string;
-   tag: "Work" | "Personal" | "Meeting" | "Shopping" | "Todo";
+   category: { name: "Work" | "Personal" | "Meeting" | "Shopping" | "Todo" };
 };
 export type NoteFormValues = {
    title: string;
    content: string;
-   tag: "Work" | "Personal" | "Meeting" | "Shopping" | "Todo";
+   name: "Work" | "Personal" | "Meeting" | "Shopping" | "Todo";
 };
