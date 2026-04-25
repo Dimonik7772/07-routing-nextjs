@@ -12,7 +12,7 @@ type NoteFormProps = {
 const initialValues: NoteFormValues = {
    title: "",
    content: "",
-   tag: "Todo",
+   name: "Todo",
 };
 
 const NoteFormValidationSchema = Yup.object().shape({
@@ -83,8 +83,8 @@ export default function NoteForm({ onClose }: NoteFormProps) {
                />
             </div>
             <div className={css.formGroup}>
-               <label htmlFor="tag">Tag</label>
-               <Field as="select" id="tag" name="tag" className={css.select}>
+               <label htmlFor="name">Tag</label>
+               <Field as="select" id="name" name="name" className={css.select}>
                   <option value="Todo">Todo</option>
                   <option value="Work">Work</option>
                   <option value="Personal">Personal</option>
