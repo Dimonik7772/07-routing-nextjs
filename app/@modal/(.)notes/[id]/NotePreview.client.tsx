@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import { getNoteById } from '@/lib/api';
 import Loader from '@/app/loading';
 import { useRouter } from 'next/navigation';
-import Modal from '@/app/components/Modal/Modal';
+import Modal from '@/components/Modal/Modal';
 
 type Props = {
   id: string;
@@ -16,7 +16,7 @@ export default function NotePreviewClient({ id }: Props) {
     isLoading,
     isError,
   } = useQuery({
-    queryKey: ['NoteById', id],
+    queryKey: ['notes', id],
     queryFn: () => getNoteById(id),
     refetchOnMount: false,
   });
@@ -34,7 +34,7 @@ export default function NotePreviewClient({ id }: Props) {
           <div className={css.header}>
             <h2>{note.title}</h2>
           </div>
-          <p className={css.tag}>{note.category.name}</p>
+          <p className={css.tag}>{note.tag}</p>
           <p className={css.content}>{note.content}</p>
           <p className={css.date}>{note.createdAt}</p>
         </div>

@@ -43,7 +43,7 @@ export default function NoteForm({ onClose }: NoteFormProps) {
             actions.resetForm();
             onClose();
             queryClient.invalidateQueries({
-               queryKey: ["NotesByCategories"],
+               queryKey: ["notes"],
             });
          },
       });

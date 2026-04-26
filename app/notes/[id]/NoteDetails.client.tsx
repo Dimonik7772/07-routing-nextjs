@@ -15,20 +15,20 @@ export default function NoteDetailsClient({ id }: NoteDetailsClientProps) {
     isError,
     error,
   } = useQuery({
-    queryKey: ['note', id],
+    queryKey: ['notes', id],
     queryFn: () => getNoteById(id),
     refetchOnMount: false,
   });
   if (isLoading) return <Loader />;
   if (isError) return <Error error={error} />;
-  if (!note) return null;
+  if (!note) return <p>Note not found</p>;
   return (
     <div className={css.container}>
       <div className={css.item}>
         <div className={css.header}>
           <h2>{note.title}</h2>
         </div>
-        <p className={css.tag}>{note.category.name}</p>
+        <p className={css.tag}>{note.tag}</p>
         <p className={css.content}>{note.content}</p>
         <p className={css.date}>{note.createdAt}</p>
       </div>

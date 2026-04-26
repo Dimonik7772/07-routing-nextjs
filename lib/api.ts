@@ -40,10 +40,3 @@ export const getNoteById = async (noteId: string) => {
    const response = await axios.get<Note>(`/notes/${noteId}`);
    return response.data;
 };
-
-export const getNotesByTag = async (tag?: string): Promise<ApiResponse> => {
-   const response = await axios.get<ApiResponse>(`/notes`, {
-      params: { tag },
-   });
-   return response.data;
-};
