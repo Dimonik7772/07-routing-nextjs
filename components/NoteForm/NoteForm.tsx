@@ -12,7 +12,7 @@ type NoteFormProps = {
 const initialValues: NoteFormValues = {
    title: "",
    content: "",
-   name: "Todo",
+   tag: "Work",
 };
 
 const NoteFormValidationSchema = Yup.object().shape({
@@ -28,6 +28,7 @@ const NoteFormValidationSchema = Yup.object().shape({
 
 export default function NoteForm({ onClose }: NoteFormProps) {
    const queryClient = useQueryClient();
+
    const mutation = useMutation({
       mutationFn: createNote,
    });
@@ -36,12 +37,13 @@ export default function NoteForm({ onClose }: NoteFormProps) {
       values: NoteFormValues,
       actions: FormikHelpers<NoteFormValues>,
    ) => {
+      console.log(values);
       mutation.mutate(values, {
          onSuccess: () => {
             actions.resetForm();
             onClose();
             queryClient.invalidateQueries({
-               queryKey: ["Notes"],
+               queryKey: ["NotesByCategories"],
             });
          },
       });
@@ -83,8 +85,8 @@ export default function NoteForm({ onClose }: NoteFormProps) {
                />
             </div>
             <div className={css.formGroup}>
-               <label htmlFor="name">Tag</label>
-               <Field as="select" id="name" name="name" className={css.select}>
+               <label htmlFor="tag">tag</label>
+               <Field as="select" id="tag" name="tag" className={css.select}>
                   <option value="Todo">Todo</option>
                   <option value="Work">Work</option>
                   <option value="Personal">Personal</option>

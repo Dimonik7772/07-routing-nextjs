@@ -1,26 +1,20 @@
-'use client';
-
-import css from './SidebarNotes.module.css';
-import { getCategories } from '@/lib/api';
-import { useQuery } from '@tanstack/react-query';
 import Link from 'next/link';
+import css from './SidebarNotes.module.css';
+
+const tags = ['Todo', 'Work', 'Personal', 'Meeting', 'Shopping'];
 
 export default function NotesSidebar() {
-  const { data } = useQuery({
-    queryKey: ['Note'],
-    queryFn: getCategories,
-  });
   return (
     <ul className={css.menuList}>
       <li className={css.menuItem}>
-        <Link href={`/notes/filter/all`} className={css.menuLink}>
+        <Link href="/notes/filter/all" className={css.menuLink}>
           All notes
         </Link>
       </li>
-      {data?.map(category => (
-        <li key={category.id} className={css.menuItem}>
-          <Link href={`/notes/filter/${category.id}`} className={css.menuLink}>
-            {category.name}
+      {tags.map(tag => (
+        <li className={css.menuItem} key={tag}>
+          <Link href={`/notes/filter/${tag}`} className={css.menuLink}>
+            {tag}
           </Link>
         </li>
       ))}

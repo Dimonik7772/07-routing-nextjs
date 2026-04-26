@@ -8,15 +8,18 @@ type NotesByIdCategoryProps = {
 
 const NotesByCategory = async ({ params }: NotesByIdCategoryProps) => {
   const { slug } = await params;
-  const category = slug[0] === 'all' ? undefined : slug[0];
+
+  const tag = slug[0];
   const queryClient = new QueryClient();
+
   await queryClient.prefetchQuery({
-    queryKey: ['NotesByCategories', category],
-    queryFn: () => getNotes(category),
+    queryKey: ['notes', 1, '', tag],
+    queryFn: () => getNotes(1, '', tag),
   });
+
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <NotesClient category={category} />
+      <NotesClient tag={tag} />
     </HydrationBoundary>
   );
 };
