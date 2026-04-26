@@ -18,7 +18,7 @@ export default function NotePreviewClient({ id }: Props) {
     isError,
     error,
   } = useQuery({
-    queryKey: ['notes', id],
+    queryKey: ['note', id],
     queryFn: () => getNoteById(id),
     refetchOnMount: false,
   });
