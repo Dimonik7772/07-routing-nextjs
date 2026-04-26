@@ -6,6 +6,7 @@ import { getNoteById } from '@/lib/api';
 import Loader from '@/app/loading';
 import { useRouter } from 'next/navigation';
 import Modal from '@/components/Modal/Modal';
+import Error from '@/app/error';
 
 type Props = {
   id: string;
@@ -15,6 +16,7 @@ export default function NotePreviewClient({ id }: Props) {
     data: note,
     isLoading,
     isError,
+    error,
   } = useQuery({
     queryKey: ['notes', id],
     queryFn: () => getNoteById(id),
@@ -22,13 +24,17 @@ export default function NotePreviewClient({ id }: Props) {
   });
   const router = useRouter();
   const close = () => router.back();
+
+  if (isLoading) return <Loader />;
+  if (isError) {
+    return <Error error={error} />;
+  }
   if (!note) return isError;
   return (
     <Modal onClose={close}>
       <button onClick={close} className={css.backBtn}>
         Close
       </button>
-      {isLoading && <Loader />}
       <div className={css.container}>
         <div className={css.item}>
           <div className={css.header}>
