@@ -5,9 +5,9 @@ type Props = {
 };
 export default function NotesLayout({ children, sidebar }: Props) {
   return (
-    <section className={css.section}>
-      <aside>{sidebar}</aside>
-      <div>{children}</div>
+    <section className={css.container}>
+      <aside className={css.sidebar}>{sidebar}</aside>
+      <div className={css.notesWrapper}>{children}</div>
     </section>
   );
 }
